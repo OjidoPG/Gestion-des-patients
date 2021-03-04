@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c8ae8e93-f9e8-4d77-96c2-677d25088db9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Controller/Ordonnance/EnregistrerOrdonnanceController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Controller/Ordonnance/SupprimerOrdonnanceController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Controller/Ordonnance/UpdateOrdonnanceController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Vue/Ordonnance/editOrdonnance.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Vue/Ordonnance/listeOrdonnance.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Vue/Ordonnance/nouvelleOrdonnance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Patients.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Create.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Create.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Read.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Read.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/Patients/editPatient.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/Patients/editPatient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/Template/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/Template/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accueil.php" beforeDir="false" afterPath="$PROJECT_DIR$/accueil.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1ozOlK4vBAGaDfkoUQFgy9XCU24" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c8ae8e93-f9e8-4d77-96c2-677d25088db9" name="Default Changelist" comment="" />
+      <created>1614286102257</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614286102257</updated>
+      <workItem from="1614286103678" duration="62000" />
+      <workItem from="1614417970742" duration="812000" />
+      <workItem from="1614426131570" duration="812000" />
+      <workItem from="1614723752332" duration="6204000" />
+      <workItem from="1614764161826" duration="1167000" />
+      <workItem from="1614775014631" duration="5894000" />
+      <workItem from="1614783367574" duration="2067000" />
+      <workItem from="1614788551243" duration="811000" />
+      <workItem from="1614810466913" duration="4858000" />
+      <workItem from="1614866148967" duration="2968000" />
+      <workItem from="1614869789066" duration="2792000" />
+      <workItem from="1614872773792" duration="548000" />
+      <workItem from="1614873338445" duration="69000" />
+      <workItem from="1614893463254" duration="620000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
