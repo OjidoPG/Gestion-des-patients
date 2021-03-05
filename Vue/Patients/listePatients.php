@@ -1,6 +1,8 @@
 <?php
 include '../Template/header.php';
 include '../../Model/Read.php';
+include_once '../../Model/Utils.php';
+
 $read = new Read();
 ?>
 
@@ -41,32 +43,20 @@ $read = new Read();
         <?php
         $TousPatients = $read->getAllPatients();
         foreach ($TousPatients as $patient) {
-            if ($patient['sexe'] == "0") {
-                $civilite = "Mme";
-                $color = "#FF00FF";
-            } else if ($patient['sexe'] == "1") {
-                $civilite = "M";
-                $color = "#0000FF";
-            } else if ($patient['sexe'] == "3") {
-                $civilite = "Inconnue";
-                $color = "#FF5733";
-            }
-
+            $civilite = Utils::CalculCivilite($patient['sexe']);
             if ($patient['naissance'] != "") {
-                $ddnExplode = explode("-", $patient['naissance']);
-                $patient['naissance'] = $ddnExplode[2] . "/" . $ddnExplode[1] . "/" . $ddnExplode[0];
+                $ddn = Utils::DDNFormat($patient['naissance']);
             }
-
             ?>
             <tr>
-                <td style="color: <?php echo $color ?>"><?php echo $civilite ?></td>
+                <td style="color: <?php echo $civilite[1] ?>"><?php echo $civilite[0] ?></td>
                 <td><?php echo $patient['nom'] ?></td>
                 <td><?php echo $patient['prenom'] ?></td>
-                <td><?php echo $patient['naissance'] ?></td>
+                <td><?php echo $ddn ?></td>
                 <td><?php echo $patient['cp'] ?></td>
                 <td><?php echo $patient['ville'] ?></td>
                 <td><a href="editPatient.php?id=<?php echo $patient['id'] ?>"><i class="fa fa-user-circle"
-                                                                                 style="color: <?php echo $color ?>"></i></a>
+                                                                                 style="color: <?php echo $civilite[1] ?>"></i></a>
                 </td>
             </tr>
         <?php } ?>

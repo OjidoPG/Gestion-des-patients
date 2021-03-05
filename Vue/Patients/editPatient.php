@@ -1,33 +1,13 @@
 <?php
 include '../Template/header.php';
 include '../../Model/Read.php';
+include_once '../../Model/Utils.php';
 
 $id = $_GET['id'];
 $read = new Read();
 $patient = $read->getOnePatient($id);
 
-/**
- * Calcul civilité
- */
-if ($patient[0]['sexe'] == "0") {
-    $icone = "fa fa-venus";
-    $color = "#FF00FF";
-} else if ($patient[0]['sexe'] == "1") {
-    $icone = "fa fa-mars";
-    $color = "#0000FF";
-} else if ($patient[0]['sexe'] == "3") {
-    $icone = "fa fa-question";
-    $color = "#FF5733";
-}
-
-/**
- * Calcul âge
- */
-$origine = new DateTime('now');
-$target = new DateTime($patient[0]['naissance']);
-$diff = date_diff($origine, $target);
-$age = $diff->format("%Y");
-
+$age=Utils::CalculAge($patient[0]['naissance']);
 ?>
 
 <body>
@@ -279,6 +259,18 @@ $age = $diff->format("%Y");
             </div>
         </div>
 
+        <div class="modal-footer">
+            <a href="listePatients.php" class="btn btn-secondary" role="button"
+               aria-pressed="true">Retour</a>
+            <button type="button" class="btn btn-success" onclick="SauvegarderPatient()">
+                Sauvegarder
+            </button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#suppressionModal"
+            ">
+            Supprimer
+            </button>
+        </div>
+
         <!-- Ordonnance -->
         <div class="col-12 alert alert-info text-center"><strong>Ordonnances</strong></div>
         <div class="col-4 offset-4 text-center">
@@ -298,7 +290,6 @@ $age = $diff->format("%Y");
                 <th scope="col">Fin</th>
                 <th scope="col">Médecin</th>
                 <th scope="col">Editer</th>
-                <th scope="col">Archiver</th>
             </tr>
             </thead>
             <tbody>
@@ -306,52 +297,24 @@ $age = $diff->format("%Y");
             $read = new Read();
             $ToutesOrdonnance = $read->getOneOrdonnance($patient[0]['id']);
             foreach ($ToutesOrdonnance as $ordonnance) {
-                $dateDuJour = strtotime(date('y-m-d'));
-                $dateDuJour15Jours = strtotime(date('y-m-d', strtotime('+15 day')));
-                $dateFin = strtotime($ordonnance['fin']);
-                if ($dateFin < $dateDuJour) {
-                    ?>
-                    <tr style="background-color: #F2D7D5">
-                    <?php
-                } else if ($dateFin < $dateDuJour15Jours) { ?>
-                    <tr style="background-color: #FDEBD0 ">
-                    <?php
-                } else {
-                    ?>
-                    <tr style="background-color: #D5F5E3">
-                    <?php
-                }
-                $dateDebutExplode = explode("-", $ordonnance['debut']);
-                $ordonnance['debut'] = $dateDebutExplode[2] . "/" . $dateDebutExplode[1] . "/" . $dateDebutExplode[0];
-                $dateFinExplode = explode("-", $ordonnance['fin']);
-                $ordonnance['fin'] = $dateFinExplode[2] . "/" . $dateFinExplode[1] . "/" . $dateFinExplode[0];
+                $color = Utils::BckGrndColor($ordonnance['fin']);
+                $dateDebut = Utils::DDNFormat($ordonnance['debut']);
+                $dateFin = Utils::DDNFormat($ordonnance['fin']);
                 $patient = $read->getOnePatient($ordonnance['id_patient']);
                 $medecin = $read->getOneMedecin($ordonnance['id_medecin']);
                 ?>
+                <tr style="background-color: <?php echo $color ?>">
                 <td><?php echo $patient[0]['nom'] ?>&nbsp<?php echo $patient[0]['prenom'] ?></td>
-                <td><?php echo $ordonnance['debut'] ?></td>
-                <td><?php echo $ordonnance['fin'] ?></td>
+                <td><?php echo $dateDebut ?></td>
+                <td><?php echo $dateFin ?></td>
                 <td><?php echo $medecin[0]['nom'] ?>&nbsp<?php echo $medecin[0]['prenom'] ?></td>
                 <td><a href="../Ordonnance/editOrdonnance.php?id=<?php echo $ordonnance['id'] ?>"><i class="fa fa-paper-plane"
                                                                                     style="color:#0275d8"></i></a>
-                <td><i class="fa fa-archive" style="color: red"></i></td>
                 </tr>
             <?php } ?>
 
             </tbody>
         </table>
-
-        <div class="modal-footer">
-            <a href="listePatients.php" class="btn btn-secondary" role="button"
-               aria-pressed="true">Retour</a>
-            <button type="button" class="btn btn-success" onclick="SauvegarderPatient()">
-                Sauvegarder
-            </button>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#suppressionModal"
-            ">
-            Supprimer
-            </button>
-        </div>
     </form>
 
     <!-- Modale de suppression-->

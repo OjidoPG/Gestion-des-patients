@@ -26,7 +26,7 @@ class Read
     public function getOnePatient($id)
     {
         $bdd = Utils::getInstance();
-        $reponse = $bdd->prepare('SELECT * FROM patient WHERE id="'.$id.'"');
+        $reponse = $bdd->prepare('SELECT * FROM patient WHERE id="' . $id . '"');
         $reponse->execute();
         $tab = $reponse->fetchAll();
         Utils::deconnexion($reponse);
@@ -72,7 +72,7 @@ class Read
     public function getOnePharmacie($id)
     {
         $bdd = Utils::getInstance();
-        $reponse = $bdd->prepare('SELECT * FROM pharmacie WHERE id="'.$id.'"');
+        $reponse = $bdd->prepare('SELECT * FROM pharmacie WHERE id="' . $id . '"');
         $reponse->execute();
         $tab = $reponse->fetchAll(PDO::FETCH_ASSOC);
         Utils::deconnexion($reponse);
@@ -99,7 +99,7 @@ class Read
     public function getOneMedecin($id)
     {
         $bdd = Utils::getInstance();
-        $reponse = $bdd->prepare('SELECT * FROM medecin WHERE id="'.$id.'"');
+        $reponse = $bdd->prepare('SELECT * FROM medecin WHERE id="' . $id . '"');
         $reponse->execute();
         $tab = $reponse->fetchAll(PDO::FETCH_ASSOC);
         Utils::deconnexion($reponse);
@@ -113,13 +113,30 @@ class Read
     public function getOneOrdonnance($id)
     {
         $bdd = Utils::getInstance();
-        $reponse = $bdd->prepare('SELECT * FROM ordonnance WHERE id_patient="'.$id.'"');
+        $reponse = $bdd->prepare('SELECT * FROM ordonnance WHERE id_patient="' . $id . '"');
         $reponse->execute();
         $tab = $reponse->fetchAll(PDO::FETCH_ASSOC);
         Utils::deconnexion($reponse);
         return $tab;
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getOneOrdonnanceFromOrdo($id)
+    {
+        $bdd = Utils::getInstance();
+        $reponse = $bdd->prepare('SELECT * FROM ordonnance WHERE id="' . $id . '"');
+        $reponse->execute();
+        $tab = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        Utils::deconnexion($reponse);
+        return $tab;
+    }
+
+    /***
+     * @return array
+     */
     public function getAllOrdonnances()
     {
         $bdd = Utils::getInstance();
