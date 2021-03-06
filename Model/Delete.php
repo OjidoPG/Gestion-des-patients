@@ -41,4 +41,17 @@ class Delete{
         Utils::deconnexion($reponse);
         return $reponse->rowCount();
     }
+
+    /**
+     * @param $id
+     * @return int
+     */
+    public function deleteOneOrdonnance($id)
+    {
+        $bdd = Utils::getInstance();
+        $reponse = $bdd->prepare('DELETE FROM ordonnance WHERE id="'.$id.'"');
+        $reponse->execute();
+        Utils::deconnexion($reponse);
+        return $reponse->rowCount();
+    }
 }

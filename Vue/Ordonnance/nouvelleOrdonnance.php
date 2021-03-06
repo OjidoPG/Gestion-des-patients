@@ -55,6 +55,15 @@ if (isset ($_GET ['id'])) {
                     <input type="date" class="form-control" id="finOrdonnance">
                 </div>
             </div>
+
+            <!-- Upload -->
+            <div class="form-group row">
+                <label for="importOrdonnance" class="col-4 form-label">Importer ordonnance</label>
+                <div class="col-6">
+                    <input type="file" class="filestyle" id="importOrdonnance">
+                </div>
+            </div>
+
             <!-- Médecin -->
             <div class="form-group row">
                 <label class="col-form-label col-4" for="medecin"><strong style="color:#0275d8">Medecin

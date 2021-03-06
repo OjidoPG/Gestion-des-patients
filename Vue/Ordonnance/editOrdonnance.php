@@ -33,6 +33,7 @@ if (isset ($_GET ['id'])) {
             <input id="idPatient" data-id="<?php echo $patientOrdo[0]['id'] ?>" hidden>
             <input id="idDateDebut" data-debut="<?php echo $ordonnance[0]['debut'] ?>" hidden>
             <input id="idDateFin" data-fin="<?php echo $ordonnance[0]['fin'] ?>" hidden>
+            <input id="idOrdonnance" data-id="<?php echo $ordonnance[0]['id'] ?>" hidden>
             <div class="form-group row">
                 <label for="nom" class="col-4 col-form-label">Nom</label>
                 <div class="col-6">
@@ -81,15 +82,36 @@ if (isset ($_GET ['id'])) {
         <a href="../Patients/editPatient.php?id=<?php echo $patientOrdo[0]['id'] ?>" class="btn btn-secondary" role="button"
            aria-pressed="true">Retour</a>
         </button>
-        <button type="button" id="enregistrerButtonOrdonnance" class="btn btn-success">
+        <button type="button" id="updateButtonOrdonnance" class="btn btn-success">
             Sauvegarder
         </button>
         <button type="button" id="enregistrerButtonOrdonnance" class="btn btn-warning">
             Archiver
         </button>
-        <button type="button" id="enregistrerButtonOrdonnance" class="btn btn-danger">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#suppressionModal">
             Supprimer
         </button>
+    </div>
+
+    <!-- Modale de suppression-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="suppressionModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color: red">Suppression</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Confirmez-vous la suppression de l'ordonnance</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitter</button>
+                    <button type="button" class="btn btn-danger" onclick="SupprimerOrdonnance()">Supprimer</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
@@ -98,6 +120,7 @@ if (isset ($_GET ['id'])) {
     jQuery(function () {
         $("#debutOrdonnance").val($("#idDateDebut").data('debut'));
         $("#finOrdonnance").val($("#idDateFin").data('fin'));
+        $("#medecin").val(<?php echo $medecinOrdo[0]['id'] ?>);
 
         $("#medecin").on('change', function () {
             $.ajax({
@@ -110,15 +133,16 @@ if (isset ($_GET ['id'])) {
             })
         })
 
-        $("#enregistrerButtonOrdonnance").on('click', function () {
+        $("#updateButtonOrdonnance").on('click', function () {
             event.preventDefault();
             if ($("#debutOrdonnance").val() != "" && $("#finOrdonnance").val() != "") {
                 $.ajax({
                     method: "POST",
-                    url: "../../Controller/Ordonnance/EnregistrerOrdonnanceController.php",
+                    url: "../../Controller/Ordonnance/UpdateOrdonnanceController.php",
                     dataType: "json",
                     data:
                         {
+                            'id' : $('#idOrdonnance').data('id'),
                             'debut': $("#debutOrdonnance").val(),
                             'fin': $("#finOrdonnance").val(),
                             'id_patient': $('#idPatient').data('id'),
@@ -145,6 +169,33 @@ if (isset ($_GET ['id'])) {
             }
         })
     })
+
+    function SupprimerOrdonnance() {
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "../../Controller/Ordonnance/SupprimerOrdonnanceController.php",
+            dataType: "json",
+            data:
+                {
+                    'id': $('#idOrdonnance').data('id')
+                },
+        }).done(function (data) {
+            if (JSON.parse(data) == 1) {
+                $("#div0").css("display", "none");
+                $("#div1").css("display", "none");
+                $("#div2").css("display", "none");
+                $("#div3").css("display", "none");
+                $("#div4").css("display", "block");
+            } else {
+                $("#div0").css("display", "none");
+                $("#div1").css("display", "none");
+                $("#div2").css("display", "none");
+                $("#div3").css("display", "block");
+                $("#div4").css("display", "none");
+            }
+        })
+    };
 </script>
 
 

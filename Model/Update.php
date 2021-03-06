@@ -43,7 +43,6 @@ class Update
             'id_pharmacie' => $id_pharmacie
         ));
         Utils::deconnexion($reponse);
-
         return $reponse->rowCount();
     }
 
@@ -71,7 +70,6 @@ class Update
             'id' => $id
         ));
         Utils::deconnexion($reponse);
-
         return $reponse->rowCount();
     }
 
@@ -101,7 +99,29 @@ class Update
             'id' => $id
         ));
         Utils::deconnexion($reponse);
+        return $reponse->rowCount();
+    }
 
+    /**
+     * @param $id
+     * @param $debut
+     * @param $fin
+     * @param $id_patient
+     * @param $id_medecin
+     * @return int
+     */
+    public function UpdateOrdonnance($id, $debut, $fin, $id_patient, $id_medecin)
+    {
+        $bdd = Utils::getInstance();
+        $reponse = $bdd->prepare('UPDATE ordonnance SET debut=:debut, fin=:fin, id_patient=:id_patient, id_medecin=:id_medecin WHERE id=:id');
+        $reponse->execute(array(
+            'debut' => $debut,
+            'fin' =>$fin,
+            'id_patient' => $id_patient,
+            'id_medecin' => $id_medecin,
+            'id' => $id
+        ));
+        Utils::deconnexion($reponse);
         return $reponse->rowCount();
     }
 }

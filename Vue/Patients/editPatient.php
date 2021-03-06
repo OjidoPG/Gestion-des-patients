@@ -265,8 +265,7 @@ $age=Utils::CalculAge($patient[0]['naissance']);
             <button type="button" class="btn btn-success" onclick="SauvegarderPatient()">
                 Sauvegarder
             </button>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#suppressionModal"
-            ">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#suppressionModal">
             Supprimer
             </button>
         </div>

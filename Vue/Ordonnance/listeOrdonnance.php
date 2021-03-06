@@ -8,7 +8,7 @@ $read = new Read();
 <div class="container-fluid">
     <!-- Jumbotron -->
     <div class="jumbotron text-center" style="background-color: #f0ad4e">
-        <h1 class="display-4" style="height: 30px">Liste des ordonnances</h1>
+        <h1 class="display-4" style="height: 30px"><strong>Liste des ordonnances</strong></h1>
     </div>
 
     <!-- Boutons d'action -->
