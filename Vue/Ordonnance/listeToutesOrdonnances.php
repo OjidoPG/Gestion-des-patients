@@ -7,8 +7,8 @@ $read = new Read();
 <body>
 <div class="container-fluid">
     <!-- Jumbotron -->
-    <div class="jumbotron text-center" style="background-color: #f0ad4e">
-        <h1 class="display-4" style="height: 30px"><strong>Liste des ordonnances en cours</strong></h1>
+    <div class="jumbotron text-center" style="background-color: #d9534f">
+        <h1 class="display-4" style="height: 30px"><strong>Liste de toutes les ordonnances</strong></h1>
     </div>
 
     <!-- Boutons d'action -->
@@ -28,7 +28,6 @@ $read = new Read();
             <th scope="col">Date fin</th>
             <th scope="col">Médecin</th>
             <th scope="col">Editer</th>
-            <th scope="col">Archiver</th>
         </tr>
         </thead>
         <tbody>
@@ -64,9 +63,8 @@ $read = new Read();
             <td><?php echo $ordonnance['fin'] ?></td>
             <td><?php echo $medecin[0]['nom'] ?>&nbsp<?php echo $medecin[0]['prenom'] ?></td>
             <td><a href="../Ordonnance/editOrdonnance.php?id=<?php echo $ordonnance['id'] ?>"><i class="fa fa-paper-plane"
-                                                                                style="color:#0275d8"></i></a>
+                                                                                                 style="color:#0275d8"></i></a>
             </td>
-            <td><i class="fa fa-archive" style="color: red"></i></td>
             </tr>
         <?php } ?>
         </tbody>

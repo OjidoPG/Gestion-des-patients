@@ -79,9 +79,10 @@ if (isset ($_GET ['id'])) {
         </form>
     </div>
     <div class="modal-footer">
-        <a href="../Patients/editPatient.php?id=<?php echo $patientOrdo[0]['id'] ?>" class="btn btn-secondary" role="button"
-           aria-pressed="true">Retour</a>
-        </button>
+        <a href="../../accueil.php" class="btn btn-secondary" role="button"
+           aria-pressed="true">Retour accueil</a>
+        <a href="../Patients/editPatient.php?id=<?php echo $patientOrdo[0]['id'] ?>" class="btn btn-info" role="button"
+           aria-pressed="true">Retour patient</a>
         <button type="button" id="updateButtonOrdonnance" class="btn btn-success">
             Sauvegarder
         </button>

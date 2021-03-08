@@ -27,7 +27,7 @@ if (isset ($_GET ['id'])) {
             renseigné, ordonnance non créée</strong></div>
 
     <div class="container">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <input id="idPatient" data-id="<?php echo $patient[0]['id'] ?>" hidden>
             <div class="form-group row">
                 <label for="nom" class="col-4 col-form-label">Nom</label>
@@ -58,9 +58,9 @@ if (isset ($_GET ['id'])) {
 
             <!-- Upload -->
             <div class="form-group row">
-                <label for="importOrdonnance" class="col-4 form-label">Importer ordonnance</label>
+                <label for="fileToUpload" class="col-4 form-label">Importer ordonnance</label>
                 <div class="col-6">
-                    <input type="file" class="filestyle" id="importOrdonnance">
+                    <input type="file" class="filestyle" name="fileToUpload" id="fileToUpload">
                 </div>
             </div>
 

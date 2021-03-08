@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8ae8e93-f9e8-4d77-96c2-677d25088db9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Vue/Ordonnance/listeToutesOrdonnances.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/Ordonnance/SupprimerOrdonnanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Ordonnance/SupprimerOrdonnanceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/Ordonnance/UpdateOrdonnanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Ordonnance/UpdateOrdonnanceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Delete.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Delete.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Update.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Update.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Vue/Ordonnance/editOrdonnance.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/Ordonnance/editOrdonnance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/Ordonnance/listeOrdonnance.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/Ordonnance/listeOrdonnance.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Vue/Ordonnance/nouvelleOrdonnance.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/Ordonnance/nouvelleOrdonnance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vue/Patients/editPatient.php" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/Patients/editPatient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accueil.php" beforeDir="false" afterPath="$PROJECT_DIR$/accueil.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +61,13 @@
       <workItem from="1614980980025" duration="6681000" />
       <workItem from="1615023408318" duration="841000" />
       <workItem from="1615047746671" duration="211000" />
+      <workItem from="1615057010902" duration="1503000" />
+      <workItem from="1615106547838" duration="3300000" />
+      <workItem from="1615120476056" duration="2228000" />
+      <workItem from="1615127012624" duration="1046000" />
+      <workItem from="1615134221771" duration="745000" />
+      <workItem from="1615144952307" duration="5979000" />
+      <workItem from="1615178074179" duration="2351000" />
     </task>
     <servers />
   </component>
