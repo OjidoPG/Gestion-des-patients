@@ -28,7 +28,6 @@ $read = new Read();
             <th scope="col">Date fin</th>
             <th scope="col">Médecin</th>
             <th scope="col">Editer</th>
-            <th scope="col">Archiver</th>
         </tr>
         </thead>
         <tbody>
@@ -63,10 +62,10 @@ $read = new Read();
             <td><?php echo $ordonnance['debut'] ?></td>
             <td><?php echo $ordonnance['fin'] ?></td>
             <td><?php echo $medecin[0]['nom'] ?>&nbsp<?php echo $medecin[0]['prenom'] ?></td>
-            <td><a href="../Ordonnance/editOrdonnance.php?id=<?php echo $ordonnance['id'] ?>"><i class="fa fa-paper-plane"
-                                                                                style="color:#0275d8"></i></a>
+            <td><a href="../Ordonnance/editOrdonnance.php?id=<?php echo $ordonnance['id'] ?>"><i
+                            class="fa fa-paper-plane"
+                            style="color:#0275d8"></i></a>
             </td>
-            <td><i class="fa fa-archive" style="color: red"></i></td>
             </tr>
         <?php } ?>
         </tbody>

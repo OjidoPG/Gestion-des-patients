@@ -73,6 +73,7 @@ include_once 'Model/Utils.php';
         $read = new Read();
         $ToutesOrdonnance = $read->getAllOrdonnances();
         foreach ($ToutesOrdonnance as $ordonnance) {
+            if ($ordonnance['archive'] == 0){
             $color = Utils::BckGrndColor($ordonnance['fin']);
             $dateDebut = Utils::DDNFormat($ordonnance['debut']);
             $dateFin = Utils::DDNFormat($ordonnance['fin']);
@@ -91,7 +92,7 @@ include_once 'Model/Utils.php';
                                     style="color:#0275d8"></i></a>
                 </tr>
             <?php }
-        } ?>
+        }} ?>
         </tbody>
     </table>
 </div>

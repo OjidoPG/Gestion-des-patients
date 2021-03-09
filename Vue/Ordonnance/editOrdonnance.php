@@ -8,6 +8,11 @@ if (isset ($_GET ['id'])) {
     $patientOrdo = $read->getOnePatient($ordonnance[0]['id_patient']);
     $medecinOrdo = $read->getOneMedecin($ordonnance[0]['id_medecin']);
 }
+if ($ordonnance[0]['archive'] == 1) {
+    $disabled = "disabled";
+} else {
+    $disabled = "";
+}
 ?>
 
 <body>
@@ -27,6 +32,10 @@ if (isset ($_GET ['id'])) {
             d'enregistrement, données renseignées non valide</strong></div>
     <div id="div3" class="alert alert-warning text-center" role="alert" style="display: none"><strong>Aucune donnée
             renseigné, ordonnance non créée</strong></div>
+    <div id="div4" class="alert alert-success text-center" role="alert" style="display: none"><strong>Ordonnance
+            archivée</strong></div>
+    <div id="div5" class="alert alert-danger text-center" role="alert" style="display: none"><strong>Ordonnance
+            supprimée</strong></div>
 
     <div class="container">
         <form method="post">
@@ -51,13 +60,13 @@ if (isset ($_GET ['id'])) {
             <div class="form-group row">
                 <label for="debutOrdonnance" class="col-4 col-form-label">Date de début</label>
                 <div class="col-6">
-                    <input type="date" class="form-control" id="debutOrdonnance">
+                    <input type="date" class="form-control" id="debutOrdonnance" <?php echo $disabled ?>>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="finOrdonnance" class="col-4 col-form-label">Date de fin</label>
                 <div class="col-6">
-                    <input type="date" class="form-control" id="finOrdonnance">
+                    <input type="date" class="form-control" id="finOrdonnance" <?php echo $disabled ?>>
                 </div>
             </div>
             <!-- Médecin -->
@@ -65,7 +74,7 @@ if (isset ($_GET ['id'])) {
                 <label class="col-form-label col-4" for="medecin"><strong style="color:#0275d8">Medecin
                         prescripteur</strong></label>
                 <div class="col-6">
-                    <select class="custom-select" id="medecin" style="color:#0275d8">
+                    <select class="custom-select" id="medecin" style="color:#0275d8" <?php echo $disabled ?>>
                         <option selected value="null">Liste des médecins enregistrés</option>
                         <?php
                         $TousMedecins = $read->getAllMedecins();
@@ -83,12 +92,18 @@ if (isset ($_GET ['id'])) {
            aria-pressed="true">Retour accueil</a>
         <a href="../Patients/editPatient.php?id=<?php echo $patientOrdo[0]['id'] ?>" class="btn btn-info" role="button"
            aria-pressed="true">Retour patient</a>
-        <button type="button" id="updateButtonOrdonnance" class="btn btn-success">
-            Sauvegarder
-        </button>
-        <button type="button" id="enregistrerButtonOrdonnance" class="btn btn-warning">
-            Archiver
-        </button>
+        <?php
+        if ($ordonnance[0]['archive'] == 0) {
+            ?>
+            <button type="button" id="updateButtonOrdonnance" class="btn btn-success">
+                Sauvegarder
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#archiveModal">
+                Archiver
+            </button>
+            <?php
+        }
+        ?>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#suppressionModal">
             Supprimer
         </button>
@@ -110,6 +125,27 @@ if (isset ($_GET ['id'])) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitter</button>
                     <button type="button" class="btn btn-danger" onclick="SupprimerOrdonnance()">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale d'archivage-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="archiveModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color: red">Archivage</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Confirmez-vous l'archivage de l'ordonnance</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitter</button>
+                    <button type="button" class="btn btn-danger" onclick="ArchiverOrdonnance()">Archiver</button>
                 </div>
             </div>
         </div>
@@ -143,7 +179,7 @@ if (isset ($_GET ['id'])) {
                     dataType: "json",
                     data:
                         {
-                            'id' : $('#idOrdonnance').data('id'),
+                            'id': $('#idOrdonnance').data('id'),
                             'debut': $("#debutOrdonnance").val(),
                             'fin': $("#finOrdonnance").val(),
                             'id_patient': $('#idPatient').data('id'),
@@ -155,11 +191,15 @@ if (isset ($_GET ['id'])) {
                         $("#div1").css("display", "block");
                         $("#div2").css("display", "none");
                         $("#div3").css("display", "none");
+                        $("#div4").css("display", "none");
+                        $("#div5").css("display", "none");
                     } else {
                         $("#div0").css("display", "none");
                         $("#div1").css("display", "none");
                         $("#div2").css("display", "block");
                         $("#div3").css("display", "none");
+                        $("#div4").css("display", "none");
+                        $("#div5").css("display", "none");
                     }
                 })
             } else {
@@ -167,6 +207,8 @@ if (isset ($_GET ['id'])) {
                 $("#div1").css("display", "none");
                 $("#div2").css("display", "none");
                 $("#div3").css("display", "block");
+                $("#div4").css("display", "none");
+                $("#div5").css("display", "none");
             }
         })
     })
@@ -187,16 +229,47 @@ if (isset ($_GET ['id'])) {
                 $("#div1").css("display", "none");
                 $("#div2").css("display", "none");
                 $("#div3").css("display", "none");
-                $("#div4").css("display", "block");
+                $("#div4").css("display", "none");
+                $("#div5").css("display", "block");
             } else {
                 $("#div0").css("display", "none");
                 $("#div1").css("display", "none");
                 $("#div2").css("display", "none");
                 $("#div3").css("display", "block");
                 $("#div4").css("display", "none");
+                $("#div5").css("display", "none");
             }
         })
     };
+
+    function ArchiverOrdonnance() {
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "../../Controller/Ordonnance/ArchiverOrdonnanceController.php",
+            dataType: "json",
+            data:
+                {
+                    'id': $('#idOrdonnance').data('id')
+                },
+        }).done(function (data) {
+            if (JSON.parse(data) == 1) {
+                $("#div0").css("display", "none");
+                $("#div1").css("display", "none");
+                $("#div2").css("display", "none");
+                $("#div3").css("display", "none");
+                $("#div4").css("display", "block");
+                $("#div5").css("display", "none");
+            } else {
+                $("#div0").css("display", "none");
+                $("#div1").css("display", "none");
+                $("#div2").css("display", "none");
+                $("#div3").css("display", "block");
+                $("#div4").css("display", "none");
+                $("#div5").css("display", "none");
+            }
+        })
+    }
 </script>
 
 

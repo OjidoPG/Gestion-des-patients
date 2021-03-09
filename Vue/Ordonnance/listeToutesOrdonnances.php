@@ -1,6 +1,7 @@
 <?php
 include '../Template/header.php';
 include '../../Model/Read.php';
+include_once '../../Model/Utils.php';
 $read = new Read();
 ?>
 
@@ -35,38 +36,27 @@ $read = new Read();
         <?php
         $ToutesOrdonnances = $read->getAllOrdonnances();
         foreach ($ToutesOrdonnances as $ordonnance) {
-            $patient = $read->getOnePatient($ordonnance['id_patient']);
-            $medecin = $read->getOneMedecin($ordonnance['id_medecin']);
-            $dateDuJour = strtotime(date('y-m-d'));
-            $dateDuJour15Jours = strtotime(date('y-m-d', strtotime('+15 day')));
-            $dateFin = strtotime($ordonnance['fin']);
-            if ($dateFin < $dateDuJour) {
-                ?>
-                <tr style="background-color: #F2D7D5">
-                <?php
-            } else if ($dateFin < $dateDuJour15Jours) { ?>
-                <tr style="background-color: #FDEBD0 ">
-                <?php
-            } else {
-                ?>
-                <tr style="background-color: #D5F5E3">
-                <?php
-            }
-            $dateDebutExplode = explode("-", $ordonnance['debut']);
-            $ordonnance['debut'] = $dateDebutExplode[2] . "/" . $dateDebutExplode[1] . "/" . $dateDebutExplode[0];
-            $dateFinExplode = explode("-", $ordonnance['fin']);
-            $ordonnance['fin'] = $dateFinExplode[2] . "/" . $dateFinExplode[1] . "/" . $dateFinExplode[0];
-            $patient = $read->getOnePatient($ordonnance['id_patient']);
-            ?>
+        if ($ordonnance['archive'] == 0) {
+            $color = Utils::BckGrndColor($ordonnance['fin']);
+        } else {
+            $color = "#ABB2B9";
+        }
+        $dateDebut = Utils::DDNFormat($ordonnance['debut']);
+        $dateFin = Utils::DDNFormat($ordonnance['fin']);
+        $patient = $read->getOnePatient($ordonnance['id_patient']);
+        $medecin = $read->getOneMedecin($ordonnance['id_medecin']);
+
+        ?>
+        <tr style="background-color: <?php echo $color ?>">
             <td><?php echo $patient[0]['nom'] ?>&nbsp<?php echo $patient[0]['prenom'] ?></td>
             <td><?php echo $ordonnance['debut'] ?></td>
             <td><?php echo $ordonnance['fin'] ?></td>
             <td><?php echo $medecin[0]['nom'] ?>&nbsp<?php echo $medecin[0]['prenom'] ?></td>
-            <td><a href="../Ordonnance/editOrdonnance.php?id=<?php echo $ordonnance['id'] ?>"><i class="fa fa-paper-plane"
-                                                                                                 style="color:#0275d8"></i></a>
+            <td><a href="../Ordonnance/editOrdonnance.php?id=<?php echo $ordonnance['id'] ?>"><i
+                            class="fa fa-paper-plane"
+                            style="color:#0275d8"></i></a>
             </td>
-            </tr>
-        <?php } ?>
+            <?php } ?>
         </tbody>
     </table>
 </div>

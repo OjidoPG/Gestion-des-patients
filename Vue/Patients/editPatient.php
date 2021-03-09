@@ -7,7 +7,7 @@ $id = $_GET['id'];
 $read = new Read();
 $patient = $read->getOnePatient($id);
 
-$age=Utils::CalculAge($patient[0]['naissance']);
+$age = Utils::CalculAge($patient[0]['naissance']);
 ?>
 
 <body>
@@ -266,7 +266,7 @@ $age=Utils::CalculAge($patient[0]['naissance']);
                 Sauvegarder
             </button>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#suppressionModal">
-            Supprimer
+                Supprimer
             </button>
         </div>
 
@@ -296,19 +296,24 @@ $age=Utils::CalculAge($patient[0]['naissance']);
             $read = new Read();
             $ToutesOrdonnance = $read->getOneOrdonnance($patient[0]['id']);
             foreach ($ToutesOrdonnance as $ordonnance) {
-                $color = Utils::BckGrndColor($ordonnance['fin']);
+                if ($ordonnance['archive'] == 0) {
+                    $color = Utils::BckGrndColor($ordonnance['fin']);
+                } else {
+                    $color = "#ABB2B9";
+                }
                 $dateDebut = Utils::DDNFormat($ordonnance['debut']);
                 $dateFin = Utils::DDNFormat($ordonnance['fin']);
                 $patient = $read->getOnePatient($ordonnance['id_patient']);
                 $medecin = $read->getOneMedecin($ordonnance['id_medecin']);
                 ?>
                 <tr style="background-color: <?php echo $color ?>">
-                <td><?php echo $patient[0]['nom'] ?>&nbsp<?php echo $patient[0]['prenom'] ?></td>
-                <td><?php echo $dateDebut ?></td>
-                <td><?php echo $dateFin ?></td>
-                <td><?php echo $medecin[0]['nom'] ?>&nbsp<?php echo $medecin[0]['prenom'] ?></td>
-                <td><a href="../Ordonnance/editOrdonnance.php?id=<?php echo $ordonnance['id'] ?>"><i class="fa fa-paper-plane"
-                                                                                    style="color:#0275d8"></i></a>
+                    <td><?php echo $patient[0]['nom'] ?>&nbsp<?php echo $patient[0]['prenom'] ?></td>
+                    <td><?php echo $dateDebut ?></td>
+                    <td><?php echo $dateFin ?></td>
+                    <td><?php echo $medecin[0]['nom'] ?>&nbsp<?php echo $medecin[0]['prenom'] ?></td>
+                    <td><a href="../Ordonnance/editOrdonnance.php?id=<?php echo $ordonnance['id'] ?>"><i
+                                    class="fa fa-paper-plane"
+                                    style="color:#0275d8"></i></a>
                 </tr>
             <?php } ?>
 

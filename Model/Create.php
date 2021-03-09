@@ -109,13 +109,14 @@ VALUES (:nom, :prenom, :adresse,:cp,:ville,:telephone,:mail)');
     public function CreerOrdonnance($debut, $fin, $id_patient, $id_medecin)
     {
         $bdd = Utils::getInstance();
-        $reponse = $bdd->prepare('INSERT INTO ordonnance (debut, fin, id_patient, id_medecin)
-VALUES (:debut,:fin,:id_patient,:id_medecin)');
+        $reponse = $bdd->prepare('INSERT INTO ordonnance (debut, fin, id_patient, id_medecin, archive)
+VALUES (:debut,:fin,:id_patient,:id_medecin, :archive)');
         $reponse->execute(array(
             'debut' => $debut,
             'fin' => $fin,
             'id_patient' => $id_patient,
-            'id_medecin' => $id_medecin
+            'id_medecin' => $id_medecin,
+            'archive' => 0
         ));
         Utils::deconnexion($reponse);
         return $reponse->rowCount();

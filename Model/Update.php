@@ -124,4 +124,19 @@ class Update
         Utils::deconnexion($reponse);
         return $reponse->rowCount();
     }
+
+    /**
+     * @param $id
+     * @return int
+     */
+    public function archiverOneOrdonnance($id){
+        $bdd = Utils::getInstance();
+        $reponse = $bdd->prepare('UPDATE ordonnance SET archive=:archive WHERE id=:id');
+        $reponse->execute(array(
+            'archive' => 1,
+            'id' => $id
+        ));
+        Utils::deconnexion($reponse);
+        return $reponse->rowCount();
+    }
 }
