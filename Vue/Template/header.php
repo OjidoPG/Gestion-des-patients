@@ -27,5 +27,8 @@
     <!-- API CP -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.7.3/themes/base/jquery-ui.css">
+
+    <link href = "filepond.css" rel = "stylesheet">
+    <script src = "filepond.js"> </script>
 </head>
 

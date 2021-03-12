@@ -2,6 +2,8 @@
 include '../Template/header.php';
 include '../../Model/Read.php';
 
+session_start();
+
 if (isset ($_GET ['id'])) {
     $read = new Read();
     $patient = $read->getOnePatient($_GET ['id']);
@@ -27,7 +29,7 @@ if (isset ($_GET ['id'])) {
             renseigné, ordonnance non créée</strong></div>
 
     <div class="container">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" action="" id="formOrdonnance" enctype="multipart/form-data">
             <input id="idPatient" data-id="<?php echo $patient[0]['id'] ?>" hidden>
             <div class="form-group row">
                 <label for="nom" class="col-4 col-form-label">Nom</label>
@@ -56,14 +58,6 @@ if (isset ($_GET ['id'])) {
                 </div>
             </div>
 
-            <!-- Upload -->
-            <div class="form-group row">
-                <label for="fileToUpload" class="col-4 form-label">Importer ordonnance</label>
-                <div class="col-6">
-                    <input type="file" class="filestyle" name="fileToUpload" id="fileToUpload">
-                </div>
-            </div>
-
             <!-- Médecin -->
             <div class="form-group row">
                 <label class="col-form-label col-4" for="medecin"><strong style="color:#0275d8">Medecin
@@ -80,16 +74,18 @@ if (isset ($_GET ['id'])) {
                     </select>
                 </div>
             </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <a href="../Patients/editPatient.php?id=<?php echo $patient[0]['id'] ?>" class="btn btn-secondary"
+                   role="button"
+                   aria-pressed="true">Retour</a>
+                </button>
+                <button type="submit" class="btn btn-success">Enregistrer</button>
+            </div>
         </form>
     </div>
-    <div class="modal-footer">
-        <a href="../Patients/editPatient.php?id=<?php echo $patient[0]['id'] ?>" class="btn btn-secondary" role="button"
-           aria-pressed="true">Retour</a>
-        </button>
-        <button type="button" id="enregistrerButtonOrdonnance" class="btn btn-success">
-            Enregistrer
-        </button>
-    </div>
+
 </div>
 </body>
 
@@ -107,8 +103,8 @@ if (isset ($_GET ['id'])) {
             })
         })
 
-        $("#enregistrerButtonOrdonnance").on('click', function () {
-            event.preventDefault();
+        $("#formOrdonnance").on('submit', function (e) {
+            e.preventDefault();
             if ($("#debutOrdonnance").val() != "" && $("#finOrdonnance").val() != "") {
                 $.ajax({
                     method: "POST",

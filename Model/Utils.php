@@ -11,14 +11,20 @@ class Utils
     private static $_username = 'root';
     private static $_password = 'root';
 
-    private function __constructor(){}
-    private function __clone(){}
+    private function __constructor()
+    {
+    }
+
+    private function __clone()
+    {
+    }
 
     /**
      * @return PDO
      */
-    public static function getInstance(){
-        if (self::$_instance === null){
+    public static function getInstance()
+    {
+        if (self::$_instance === null) {
             self::$_instance = Utils::connexion();
         }
         return self::$_instance;
@@ -31,7 +37,7 @@ class Utils
     {
         try {
             $bdd = new PDO(
-                'mysql:host='.Utils::$_host.';dbname='.Utils::$_dbname.';charset=utf8',Utils::$_username,Utils::$_password);
+                'mysql:host=' . Utils::$_host . ';dbname=' . Utils::$_dbname . ';charset=utf8', Utils::$_username, Utils::$_password);
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -42,7 +48,7 @@ class Utils
     /**
      * @param $reponse
      */
-    public static function deconnexion($reponse):void
+    public static function deconnexion($reponse): void
     {
         $reponse->closeCursor();
     }
@@ -67,19 +73,19 @@ class Utils
     public static function CalculCivilite($sexe)
     {
         $civilite = array();
-        switch ($sexe){
+        switch ($sexe) {
             case "0":
-                $type="Mme";
+                $type = "Mme";
                 $color = "#FF00FF";
                 array_push($civilite, $type, $color);
                 break;
             case "1":
-                $type="M";
+                $type = "M";
                 $color = "#0000FF";
                 array_push($civilite, $type, $color);
                 break;
             case "3":
-                $type="Inconnue";
+                $type = "Inconnue";
                 $color = "#FF5733";
                 array_push($civilite, $type, $color);
                 break;
@@ -102,7 +108,7 @@ class Utils
      * @param $dateFin
      * @return string
      */
-    public static function BckGrndColor ($dateFin)
+    public static function BckGrndColor($dateFin)
     {
         $dateDuJour = strtotime(date('y-m-d'));
         $dateDuJour15Jours = strtotime(date('y-m-d', strtotime('+15 day')));

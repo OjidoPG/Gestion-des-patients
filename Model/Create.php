@@ -102,18 +102,20 @@ VALUES (:nom, :prenom, :adresse,:cp,:ville,:telephone,:mail)');
     /**
      * @param $debut
      * @param $fin
+     * @param $upload
      * @param $id_patient
      * @param $id_medecin
      * @return int
      */
-    public function CreerOrdonnance($debut, $fin, $id_patient, $id_medecin)
+    public function CreerOrdonnance($debut, $fin, $upload, $id_patient, $id_medecin)
     {
         $bdd = Utils::getInstance();
-        $reponse = $bdd->prepare('INSERT INTO ordonnance (debut, fin, id_patient, id_medecin, archive)
-VALUES (:debut,:fin,:id_patient,:id_medecin, :archive)');
+        $reponse = $bdd->prepare('INSERT INTO ordonnance (debut, fin, upload, id_patient, id_medecin, archive)
+VALUES (:debut,:fin,:upload, :id_patient,:id_medecin, :archive)');
         $reponse->execute(array(
             'debut' => $debut,
             'fin' => $fin,
+            'upload' => $upload,
             'id_patient' => $id_patient,
             'id_medecin' => $id_medecin,
             'archive' => 0
